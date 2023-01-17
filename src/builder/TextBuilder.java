@@ -1,10 +1,11 @@
 package builder;
 
 public interface TextBuilder {
+    String getText();
 
     void reset();
-    void dealtDamage(int damage);
-    void tookDamage(int damage);
-    void healed(int healing);
-    void shield(int shielding);
+    void dealtDamage(String damage);
+    void tookDamage(String damage);
+    void healed(String healing);
+    void shield(String shielding);
 }
