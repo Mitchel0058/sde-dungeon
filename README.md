@@ -11,4 +11,5 @@ This is stuff
 
 # Behavioral:
 * State
+* Strategy
 

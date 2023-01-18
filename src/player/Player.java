@@ -3,24 +3,12 @@ package player;
 public class Player {
     private int hp = 100;
     private int attack = 30;
-
     private int block = 30;
     private int heal = 30;
 
     public void death(){
         System.out.println("You died!");
-    }
-
-    public void heal(int amount){
-        hp += amount;
-    }
-
-    public void damage(int amount){
-        hp -= amount;
-
-        if (hp >= 0){
-            death();
-        }
+        System.exit(1);
     }
 
     public int getAttack() {
@@ -51,4 +39,7 @@ public class Player {
         return hp;
     }
 
+    public void setHp(int hp) {
+        this.hp = hp;
+    }
 }

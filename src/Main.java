@@ -1,15 +1,10 @@
 import builder.*;
-import java.util.concurrent.ThreadLocalRandom;
 
 public class Main {
     public static void main(String[] args) {
         ConsoleReader reader = new ConsoleReader();
         ConsoleWriter writer = new ConsoleWriter();
         StringToIntAdapter stringToIntAdapter = new StringToIntAdapter();
-
-//        for (int i = 0; i < 99; i++){
-//            System.out.println(ThreadLocalRandom.current().nextInt(80, 121));
-//        }
 
         Dungeon dungeon = new Dungeon();
         Pirates pirates = new Pirates();
