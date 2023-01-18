@@ -1,5 +1,5 @@
-import builder.TextDirector;
-import builder.Example;
+import builder.*;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Main {
     public static void main(String[] args) {
@@ -7,17 +7,21 @@ public class Main {
         ConsoleWriter writer = new ConsoleWriter();
         StringToIntAdapter stringToIntAdapter = new StringToIntAdapter();
 
-        Example example = new Example();
+//        for (int i = 0; i < 99; i++){
+//            System.out.println(ThreadLocalRandom.current().nextInt(80, 121));
+//        }
 
-        TextDirector textDirector = new TextDirector(example);
-
+        Dungeon dungeon = new Dungeon();
+        Pirates pirates = new Pirates();
+        Cyber cyber = new Cyber();
+        TextDirector textDirector = new TextDirector(dungeon);
 
         writer.write("""
                 Welcome, brave adventurer to this dark dungeon. Are you ready?\s
                 [1] Yes!\s
                 [2] No!""");
 
-        int ans = stringToIntAdapter.adaptString(reader.readLine());
+        int ans = stringToIntAdapter.adaptString(reader.readLine(), 2);
 
         if (ans == 2) {
             writer.write("Well fine. Goodbye then.");
@@ -25,7 +29,7 @@ public class Main {
         }
         while (ans == 0) {
             writer.write("I'm sorry, I did not understand that.");
-            ans = stringToIntAdapter.adaptString(reader.readLine());
+            ans = stringToIntAdapter.adaptString(reader.readLine(), 2);
             if (ans == 2) {
                 writer.write("Well fine. Goodbye then.");
                 System.exit(0);
@@ -38,10 +42,24 @@ public class Main {
                 [2] Pirates\s
                 [3] Cyber""");
 
-        ans = stringToIntAdapter.adaptString(reader.readLine());
+        ans = stringToIntAdapter.adaptString(reader.readLine(), 3);
 
+        while (ans == 0) {
+            writer.write("Try again");
+            ans = stringToIntAdapter.adaptString(reader.readLine(), 3);
+        }
+
+        if (ans == 1) {
+            writer.write("You enter a dark crypt.");
+            textDirector.Changebuilder(dungeon);
+        } else if (ans == 2) {
+            writer.write("Yarr boardin' a mighty battalion.");
+            textDirector.Changebuilder(pirates);
+        } else if (ans == 3) {
+            writer.write("You enter the training room");
+            textDirector.Changebuilder(cyber);
+        }
 
         writer.write(textDirector.makeBattleText());
-
     }
 }

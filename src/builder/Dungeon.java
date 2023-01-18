@@ -1,6 +1,6 @@
 package builder;
 
-public class Example implements TextBuilder {
+public class Dungeon implements TextBuilder {
 
     private String text;
 
@@ -13,25 +13,25 @@ public class Example implements TextBuilder {
 
     @Override
     public void dealtDamage(String damage) {
-        text += "You dealt " + damage + " damage.";
+        text += "Your sword slashed them for " + damage + " damage.";
         addNewLine();
     }
 
     @Override
     public void tookDamage(String damage) {
-        text += "You took " + damage + " damage.";
+        text += "You got slashed for " + damage + " damage.";
         addNewLine();
     }
 
     @Override
     public void healed(String healing) {
-        text += "You healed for " + healing + " hp.";
+        text += "You cast a healing spell healing for " + healing + " hp.";
         addNewLine();
     }
 
     @Override
     public void shield(String shielding) {
-        text += "You blocked " + shielding + " damage.";
+        text += "Your shield protected you for " + shielding + " damage.";
         addNewLine();
     }
 
