@@ -11,20 +11,25 @@ public class PlayerAttack implements PlayerState {
     }
 
     @Override
+    public int attack() {
+        return player.getAttack();
+    }
+
+    @Override
     public void takeDamage(int amount) {
         if (ThreadLocalRandom.current().nextInt(0, 4) == 0) {
-            System.out.println("Your attacks clashed!");
+            System.out.println("You overwhelmed the enemy with your sword fighting skills!");
             return;
         }
 
         player.setHp(player.getHp() - amount);
-        if (player.getHp() >= 0) {
+        if (player.getHp() <= 0) {
             player.death();
         }
     }
 
     @Override
-    public void heal(int amount) {
+    public void heal() {
 
     }
 }

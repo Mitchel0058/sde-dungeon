@@ -11,11 +11,13 @@ public class StringToIntAdapter {
             }
         }
 
-//        Unlikely that someone will type out something higher than nine in letters.
+//        If I ever add a question for more than nine options I could increase this, but for now this is enough.
+//        Above nine you probably won't type it out anyways
         String[] numbers = {"one", "two", "three", "four", "five", "six", "seven", "eight", "nine"};
-        for (int i = 0; i <= options; i++) {
-            if (Objects.equals(string, numbers[0])) {
-                return i;
+        for (int i = 0; i < options; i++) {
+            System.out.println(string + " " + numbers[i]);
+            if (Objects.equals(string, numbers[i])) {
+                return i + 1;
             }
         }
 

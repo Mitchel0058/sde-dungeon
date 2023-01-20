@@ -1,4 +1,4 @@
-package Enemy;
+package enemy;
 
 public interface EnemyStrategy {
 

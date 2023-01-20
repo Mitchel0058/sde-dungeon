@@ -1,37 +1,27 @@
-package player;
+package enemy;
 
-import java.util.concurrent.ThreadLocalRandom;
+public class Enemy {
+    private EnemyStrategy enemyStrategy;
 
-public class Player {
-    PlayerState playerState;
     private int hp = 100;
     private int attack = 30;
     private int block = 30;
     private int heal = 30;
     private boolean alive = true;
 
-    public void changeState(PlayerState playerState) {
-        this.playerState = playerState;
+    public void setEnemyStrategy(EnemyStrategy enemyStrategy) {
+        this.enemyStrategy = enemyStrategy;
     }
 
-    public int attack() {
-        return playerState.attack();
+    public int executeStrategy() {
+        return enemyStrategy.execute();
     }
 
-    public void takeDamage(int amount) {
-        playerState.takeDamage(amount);
-    }
-
-    public void heal() {
-        playerState.heal();
-    }
-
-    public void death() {
-        System.out.println("You died!");
+    public void death(){
+        System.out.println("Enemy slain!");
         alive = false;
     }
 
-    //    All get/set values
     public int getAttack() {
         return attack;
     }
@@ -62,6 +52,9 @@ public class Player {
 
     public void setHp(int hp) {
         this.hp = hp;
+        if (hp <= 0){
+            death();
+        }
     }
 
     public boolean isAlive() {

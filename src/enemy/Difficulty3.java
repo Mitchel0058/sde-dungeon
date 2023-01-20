@@ -1,6 +1,4 @@
-package Enemy;
-
-import java.util.concurrent.ThreadLocalRandom;
+package enemy;
 
 /**
  * Cheats by looking at the player's current action. Unwinnable.
