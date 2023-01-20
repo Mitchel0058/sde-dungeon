@@ -5,6 +5,7 @@ public class StringToIntAdapter {
     public int adaptString(String string, int options) {
         string = string.toLowerCase();
 
+//        Makes sure gibberish isn't send but an actual number
         for (int i = 0; i <= options; i++) {
             if (Objects.equals(string, "" + i)) {
                 return i;

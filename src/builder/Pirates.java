@@ -19,7 +19,7 @@ public class Pirates implements TextBuilder{
 
     @Override
     public void tookDamage(String damage) {
-        text += "Yarr took  " + damage + " pains.";
+        text += "Yarr took " + damage + " damage.";
         addNewLine();
     }
 
@@ -31,7 +31,19 @@ public class Pirates implements TextBuilder{
 
     @Override
     public void shield(String shielding) {
-        text += "Yarrr shielded " + shielding + " damage.";
+        text += "Yarrr shielded, reducing damage by " + shielding + "%.";
+        addNewLine();
+    }
+
+    @Override
+    public void enemyHealed(String healing) {
+        text += "Thar scallywag be eating oranges, making em " + healing + "hp fitter";
+        addNewLine();
+    }
+
+    @Override
+    public void enemyShielding(String shielding) {
+        text += "Thar scallywag got a buckler! He be fending for " + shielding + "%!";
         addNewLine();
     }
 

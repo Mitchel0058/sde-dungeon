@@ -30,7 +30,7 @@ public class Main {
 
         while (player.isAlive()) {
             writer.write("A new enemy appears!");
-            Battle(reader, writer, stringToIntAdapter, player, playerAttack, playerBlock, playerHeal, enemy);
+            Battle(reader, writer, stringToIntAdapter, player, playerAttack, playerBlock, playerHeal, enemy, textDirector);
             if (!enemy.isAlive()) {
                 defeatedEnemies += 1;
                 enemy = new Enemy();
@@ -44,7 +44,7 @@ public class Main {
         }
     }
 
-    private static void Battle(ConsoleReader reader, ConsoleWriter writer, StringToIntAdapter stringToIntAdapter, Player player, PlayerState playerAttack, PlayerState playerBlock, PlayerState playerHeal, Enemy enemy) {
+    private static void Battle(ConsoleReader reader, ConsoleWriter writer, StringToIntAdapter stringToIntAdapter, Player player, PlayerState playerAttack, PlayerState playerBlock, PlayerState playerHeal, Enemy enemy, TextDirector textDirector) {
         int ans = 0;
         while (player.isAlive() && enemy.isAlive()) {
             writer.write("Player hp: " + player.getHp() + " Enemy hp: " + enemy.getHp() + "\r\n" + "[1] Attack \r\n" + "[2] Block \r\n" + "[3] Heal");
@@ -66,26 +66,61 @@ public class Main {
                 player.changeState(playerHeal);
             }
 
+            int playerDamage = player.attack();
+            int playerHealing = player.getHeal();
+            int playerBlocking = player.getBlock();
+            int enemyDamage = enemy.getAttack();
+            int enemyHealing = enemy.getHeal();
+            int enemyHealth = enemy.getHp();
+            int enemyBlocking = enemy.getBlock();
+
             int enemyStrategy = enemy.executeStrategy();
             if (enemyStrategy == 0) {
                 System.out.println("The enemy attacks!");
-                player.takeDamage(enemy.getAttack());
-                enemy.setHp(enemy.getHp() - player.attack());
+                player.takeDamage(enemyDamage);
+                enemy.setHp(enemyHealth - playerDamage);
                 player.heal();
             } else if (enemyStrategy == 1) {
                 System.out.println("The enemy blocks!");
-                enemy.setHp((int) (enemy.getHp() - (player.attack() * 0.5)));
+                enemy.setHp((int) (enemyHealth - (playerDamage * 0.5)));
                 player.heal();
             } else if (enemyStrategy == 2) {
                 System.out.println("The enemy heals!");
-                enemy.setHp(enemy.getHp() - player.attack());
-                enemy.setHp(enemy.getHp() + enemy.getHeal());
+                enemy.setHp(enemyHealth - playerDamage);
+                enemy.setHp(enemyHealth + enemyHealing);
                 player.heal();
             } else {
-                System.out.println("Something went wrong, enemy somehow chose startegy: " + enemyStrategy);
+                System.out.println("Something went wrong, enemy somehow chose strategy: " + enemyStrategy);
+            }
+
+//            Would like to do this differently, but for now this will suffice.
+            switch (ans) {
+                case (1) -> {
+                    switch (enemyStrategy) {
+                        case (0) -> writer.write(textDirector.bothAttack(playerDamage, enemyDamage));
+                        case (1) -> writer.write("1.1");
+                        case (2) -> writer.write("1.2");
+                    }
+                }
+                case (2) -> {
+                    switch (enemyStrategy) {
+                        case (0) -> writer.write("2.0");
+                        case (1) -> writer.write(textDirector.bothBlock(playerBlocking, enemyBlocking));
+                        case (2) -> writer.write("2.2");
+                    }
+                }
+                case (3) -> {
+                    switch (enemyStrategy) {
+                        case (0) -> writer.write("3.0");
+                        case (1) -> writer.write("3.1");
+                        case (2) -> writer.write(textDirector.bothHeal(playerHealing, enemyHealing));
+                    }
+                }
             }
         }
+
     }
+
 
     private static void startupSettings(ConsoleReader reader, ConsoleWriter writer, StringToIntAdapter stringToIntAdapter, Dungeon dungeon, Pirates pirates, Cyber cyber, TextDirector textDirector) {
         writer.write("""

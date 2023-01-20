@@ -8,4 +8,6 @@ public interface TextBuilder {
     void tookDamage(String damage);
     void healed(String healing);
     void shield(String shielding);
+    void enemyHealed(String healing);
+    void enemyShielding(String shielding);
 }

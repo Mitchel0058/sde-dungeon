@@ -31,7 +31,19 @@ public class Dungeon implements TextBuilder {
 
     @Override
     public void shield(String shielding) {
-        text += "Your shield protected you for " + shielding + " damage.";
+        text += "Your shield protected you for from " + shielding + "% damage.";
+        addNewLine();
+    }
+
+    @Override
+    public void enemyHealed(String healing) {
+        text += "The enemies' flesh grew back, healing them for " + healing + "hp.";
+        addNewLine();
+    }
+
+    @Override
+    public void enemyShielding(String shielding) {
+        text += "The enemies blocked your attack with its thick flesh, blocking for " + shielding + "%";
         addNewLine();
     }
 

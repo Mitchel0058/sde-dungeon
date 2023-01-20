@@ -24,14 +24,24 @@ public class Cyber implements TextBuilder{
 
     @Override
     public void healed(String healing) {
-        text += "You healed for " + healing + " hp.";
+        text += "Your nano machines healed you for " + healing + " hp.";
         addNewLine();
     }
 
     @Override
     public void shield(String shielding) {
-        text += "You blocked " + shielding + " damage.";
+        text += "Your nano machines blocked you from " + shielding + "% damage.";
         addNewLine();
+    }
+
+    @Override
+    public void enemyHealed(String healing) {
+        text += "The enemies' nano machine started working. They healed for " + healing + "hp.";
+    }
+
+    @Override
+    public void enemyShielding(String shielding) {
+        text += "The enemies' nano machine are protecting them. They blocked for " + shielding + "%.";
     }
 
     private void addNewLine(){
