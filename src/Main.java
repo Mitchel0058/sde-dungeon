@@ -56,13 +56,10 @@ public class Main {
                 ans = stringToIntAdapter.adaptString(reader.readLine(), 3);
             }
             if (ans == 1) {
-                writer.write("Attacking!");
                 player.changeState(playerAttack);
             } else if (ans == 2) {
-                writer.write("Blocking!");
                 player.changeState(playerBlock);
             } else if (ans == 3) {
-                writer.write("Healing!");
                 player.changeState(playerHeal);
             }
 
@@ -76,18 +73,15 @@ public class Main {
 
             int enemyStrategy = enemy.executeStrategy();
             if (enemyStrategy == 0) {
-                System.out.println("The enemy attacks!");
                 player.takeDamage(enemyDamage);
                 enemy.setHp(enemyHealth - playerDamage);
                 player.heal();
             } else if (enemyStrategy == 1) {
-                System.out.println("The enemy blocks!");
                 enemy.setHp((int) (enemyHealth - (playerDamage * 0.5)));
                 player.heal();
             } else if (enemyStrategy == 2) {
-                System.out.println("The enemy heals!");
                 enemy.setHp(enemyHealth - playerDamage);
-                enemy.setHp(enemyHealth + enemyHealing);
+                enemy.setHp(enemy.getHp() + enemyHealing);
                 player.heal();
             } else {
                 System.out.println("Something went wrong, enemy somehow chose strategy: " + enemyStrategy);
@@ -98,21 +92,21 @@ public class Main {
                 case (1) -> {
                     switch (enemyStrategy) {
                         case (0) -> writer.write(textDirector.bothAttack(playerDamage, enemyDamage));
-                        case (1) -> writer.write("1.1");
-                        case (2) -> writer.write("1.2");
+                        case (1) -> writer.write(textDirector.playerAttackEnemyBlock(playerDamage, enemyBlocking));
+                        case (2) -> writer.write(textDirector.playerAttackEnemyHeal(playerDamage, enemyHealing));
                     }
                 }
                 case (2) -> {
                     switch (enemyStrategy) {
-                        case (0) -> writer.write("2.0");
+                        case (0) -> writer.write(textDirector.playerBlockEnemyAttack(playerBlocking, enemyDamage));
                         case (1) -> writer.write(textDirector.bothBlock(playerBlocking, enemyBlocking));
-                        case (2) -> writer.write("2.2");
+                        case (2) -> writer.write(textDirector.playerBlockEnemyHeal(playerBlocking, enemyHealing));
                     }
                 }
                 case (3) -> {
                     switch (enemyStrategy) {
-                        case (0) -> writer.write("3.0");
-                        case (1) -> writer.write("3.1");
+                        case (0) -> writer.write(textDirector.playerHealEnemyAttack(playerHealing, enemyDamage));
+                        case (1) -> writer.write(textDirector.playerHealEnemyBlock(playerHealing, enemyBlocking));
                         case (2) -> writer.write(textDirector.bothHeal(playerHealing, enemyHealing));
                     }
                 }

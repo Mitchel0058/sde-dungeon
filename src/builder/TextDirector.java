@@ -53,4 +53,52 @@ public class TextDirector {
 
         return textBuilder.getText();
     }
+
+    public String playerAttackEnemyBlock(int playerAttack, int enemyBlock){
+        textBuilder.reset();
+        textBuilder.dealtDamage("" + playerAttack);
+        textBuilder.enemyShielding("" + enemyBlock);
+
+        return textBuilder.getText();
+    }
+
+    public String playerAttackEnemyHeal(int playerAttack, int enemyHeal){
+        textBuilder.reset();
+        textBuilder.dealtDamage("" + playerAttack);
+        textBuilder.enemyHealed("" + enemyHeal);
+
+        return textBuilder.getText();
+    }
+
+    public String playerBlockEnemyAttack(int playerBlock, int enemyAttack){
+        textBuilder.reset();
+        textBuilder.shield("" + playerBlock);
+        textBuilder.tookDamage("" + enemyAttack);
+
+        return textBuilder.getText();
+    }
+
+    public String playerBlockEnemyHeal(int playerBlock, int enemyHeal){
+        textBuilder.reset();
+        textBuilder.shield("" + playerBlock);
+        textBuilder.enemyHealed("" + enemyHeal);
+
+        return textBuilder.getText();
+    }
+
+    public String playerHealEnemyAttack(int playerHeal, int enemyAttack){
+        textBuilder.reset();
+        textBuilder.healed("" + playerHeal);
+        textBuilder.tookDamage("" + enemyAttack);
+
+        return  textBuilder.getText();
+    }
+
+    public String playerHealEnemyBlock(int playerHeal, int enemyBlock){
+        textBuilder.reset();
+        textBuilder.healed("" + playerHeal);
+        textBuilder.enemyShielding("" + enemyBlock);
+
+        return textBuilder.getText();
+    }
 }

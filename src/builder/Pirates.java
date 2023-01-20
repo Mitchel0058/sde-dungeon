@@ -19,7 +19,7 @@ public class Pirates implements TextBuilder{
 
     @Override
     public void tookDamage(String damage) {
-        text += "Yarr took " + damage + " damage.";
+        text += "Thar scallywag slashed ye for " + damage + " damage.";
         addNewLine();
     }
 
