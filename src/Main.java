@@ -15,7 +15,6 @@ public class Main {
 
 
         startupSettings(reader, writer, stringToIntAdapter, dungeon, pirates, cyber, textDirector);
-        int ans;
 
         Player player = new Player();
         PlayerState playerAttack = new PlayerAttack(player);
@@ -24,8 +23,8 @@ public class Main {
 
         Enemy enemy = new Enemy();
         EnemyStrategy difficulty1 = new Difficulty1();
-        EnemyStrategy difficulty2 = new Difficulty2();
-        EnemyStrategy difficulty3 = new Difficulty3();
+        EnemyStrategy difficulty2 = new Difficulty2(player);
+        EnemyStrategy difficulty3 = new Difficulty3(player, enemy);
         enemy.setEnemyStrategy(difficulty1);
         int defeatedEnemies = 0;
 
@@ -35,7 +34,11 @@ public class Main {
             if (!enemy.isAlive()) {
                 defeatedEnemies += 1;
                 enemy = new Enemy();
-                enemy.setEnemyStrategy(difficulty2);
+                if (defeatedEnemies > 1) {
+                    enemy.setEnemyStrategy(difficulty3);
+                } else if (defeatedEnemies > 0) {
+                    enemy.setEnemyStrategy(difficulty2);
+                }
             }
             writer.write("\r\nYou've defeated " + defeatedEnemies + " enemies!");
         }
@@ -44,14 +47,11 @@ public class Main {
     private static void Battle(ConsoleReader reader, ConsoleWriter writer, StringToIntAdapter stringToIntAdapter, Player player, PlayerState playerAttack, PlayerState playerBlock, PlayerState playerHeal, Enemy enemy) {
         int ans = 0;
         while (player.isAlive() && enemy.isAlive()) {
-            writer.write("Player hp: " + player.getHp() + " Enemy hp: " + enemy.getHp() + "\r\n" +
-                    "[1] Attack \r\n" +
-                    "[2] Block \r\n" +
-                    "[3] Heal");
+            writer.write("Player hp: " + player.getHp() + " Enemy hp: " + enemy.getHp() + "\r\n" + "[1] Attack \r\n" + "[2] Block \r\n" + "[3] Heal");
             System.out.println();
 
             ans = stringToIntAdapter.adaptString(reader.readLine(), 3);
-            while (ans == 0){
+            while (ans == 0) {
                 writer.write("I did not understand");
                 ans = stringToIntAdapter.adaptString(reader.readLine(), 3);
             }
@@ -78,7 +78,7 @@ public class Main {
                 player.heal();
             } else if (enemyStrategy == 2) {
                 System.out.println("The enemy heals!");
-                enemy.setHp(enemy.getHp() - player.getAttack());
+                enemy.setHp(enemy.getHp() - player.attack());
                 enemy.setHp(enemy.getHp() + enemy.getHeal());
                 player.heal();
             } else {
