@@ -10,6 +10,9 @@ public class Player {
     private int heal = 30;
     private boolean alive = true;
 
+    public PlayerState getPlayerState() {
+        return playerState;
+    }
     public void changeState(PlayerState playerState) {
         this.playerState = playerState;
     }

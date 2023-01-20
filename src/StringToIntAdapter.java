@@ -15,7 +15,6 @@ public class StringToIntAdapter {
 //        Above nine you probably won't type it out anyways
         String[] numbers = {"one", "two", "three", "four", "five", "six", "seven", "eight", "nine"};
         for (int i = 0; i < options; i++) {
-            System.out.println(string + " " + numbers[i]);
             if (Objects.equals(string, numbers[i])) {
                 return i + 1;
             }
@@ -24,4 +23,3 @@ public class StringToIntAdapter {
         return 0;
     }
 }
-

@@ -52,7 +52,7 @@ public class Enemy {
 
     public void setHp(int hp) {
         this.hp = hp;
-        if (hp <= 0){
+        if (this.hp <= 0){
             death();
         }
     }

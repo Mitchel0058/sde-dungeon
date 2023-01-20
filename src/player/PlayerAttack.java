@@ -10,9 +10,15 @@ public class PlayerAttack implements PlayerState {
         this.player = player;
     }
 
+    /**
+     * Attacks, with an additional or reduced 20% damage
+     *
+     * @return the attack value
+     */
     @Override
     public int attack() {
-        return player.getAttack();
+        int attackDiscrepant = ThreadLocalRandom.current().nextInt(80, 121);
+        return (int) (player.getAttack() * ((double) attackDiscrepant / 100));
     }
 
     @Override
