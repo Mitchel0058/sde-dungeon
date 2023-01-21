@@ -35,7 +35,7 @@ public class Difficulty2 implements EnemyStrategy {
 
         switch (playerStateName) {
             case "player.PlayerAttack" -> previousPlayerState = 0;
-            case "player.PlayerDefend" -> previousPlayerState = 1;
+            case "player.PlayerBlock" -> previousPlayerState = 1;
             case "player.PlayerHeal" -> previousPlayerState = 2;
         }
 

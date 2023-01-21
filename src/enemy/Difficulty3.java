@@ -1,9 +1,6 @@
 package enemy;
 
 import player.Player;
-import player.PlayerState;
-
-import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * Cheats by looking at the player's current action.
@@ -28,15 +25,14 @@ public class Difficulty3 implements EnemyStrategy {
 
         switch (playerStateName) {
             case "player.PlayerAttack" -> playerState = 0;
-            case "player.PlayerDefend" -> playerState = 1;
+            case "player.PlayerBlock" -> playerState = 1;
             case "player.PlayerHeal" -> playerState = 2;
         }
 
+//        If player blocks, if hp < 50 heal else attack, all other cases attack
         if (playerState == 1) {
-            if (enemy.getHp() > 50) {
+            if (enemy.getHp() < 50) {
                 strategy = 2;
-            } else {
-                strategy = 1;
             }
         } else {
             strategy = 0;

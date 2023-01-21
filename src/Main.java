@@ -25,7 +25,7 @@ public class Main {
         EnemyStrategy difficulty1 = new Difficulty1();
         EnemyStrategy difficulty2 = new Difficulty2(player);
         EnemyStrategy difficulty3 = new Difficulty3(player, enemy);
-        enemy.setEnemyStrategy(difficulty1);
+        enemy.setEnemyStrategy(difficulty3);
         int defeatedEnemies = 0;
 
         while (player.isAlive()) {
@@ -45,7 +45,7 @@ public class Main {
     }
 
     private static void Battle(ConsoleReader reader, ConsoleWriter writer, StringToIntAdapter stringToIntAdapter, Player player, PlayerState playerAttack, PlayerState playerBlock, PlayerState playerHeal, Enemy enemy, TextDirector textDirector) {
-        int ans = 0;
+        int ans;
         while (player.isAlive() && enemy.isAlive()) {
             writer.write("Player hp: " + player.getHp() + " Enemy hp: " + enemy.getHp() + "\r\n" + "[1] Attack \r\n" + "[2] Block \r\n" + "[3] Heal");
             System.out.println();
@@ -87,7 +87,7 @@ public class Main {
                 System.out.println("Something went wrong, enemy somehow chose strategy: " + enemyStrategy);
             }
 
-//            Would like to do this differently, but for now this will suffice.
+//            Would like to do this differently, but for now this will suffice. At least switch is clearer here than if.
             switch (ans) {
                 case (1) -> {
                     switch (enemyStrategy) {
